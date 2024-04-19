@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mx-auto mt-10">
+  <div class="mx-auto w-5/6 bg-white px-10 py-10 shadow-md">
+    <div class="flex mt-10 mb-5 pt-2 border-t">
+      <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/4">
+        Order ID
+      </h3>
+      <h3
+        class="font-semibold text-center text-gray-600 text-xs uppercase w-1/4 text-center"
+      >
+        Date
+      </h3>
+      <h3
+        class="font-semibold text-center text-gray-600 text-xs uppercase w-1/4 text-center"
+      >
+        Items
+      </h3>
+      <h3
+        class="font-semibold text-center text-gray-600 text-xs uppercase w-1/4 text-center"
+      >
+        Total
+      </h3>
+    </div>
+      {% for order in orders %}
+      <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5" onclick="window.location.href = '/order/{{ order.id }}'">
+        <div class="flex justify-center w-1/4 text-gray-600">
+          #{{ '{:04d}'.format(order.id) }}
+        </div>
+        <div class="flex justify-center w-1/4 text-gray-600">
+          {{ order.date }}
+        </div>
+          <div class="flex justify-center w-1/4 text-gray-600">
+            {{ order['items'] }} Items
+          </div>
+        <div class="flex justify-center w-1/4 text-gray-600">
+          ${{ order.total }}
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+  </div>
+</div>
+{% endblock %}

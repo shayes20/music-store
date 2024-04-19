@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block content %}
+<div class="mt-32"></div>
+<div class="flex items-center justify-center">
+  <div class="bg-white p-6 rounded shadow-md min-w-80 w-4/12">
+    <form action="{{ url_for('register.post') }}" method="POST">
+      <h2 class="text-lg text-center font-bold mb-4 text-gray-700">Register</h2>
+      <div class="mb-2">
+        <label for="username" class="block text-gray-700 text-sm font-bold mb-2"
+          >Username</label
+        >
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2"
+          >Password</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      {% if error %}
+      <div
+        class="text-sm text-red-600 bg-red-100 border border-red-400 p-2 rounded mb-4"
+      >
+        {{ error }}
+      </div>
+      {% endif %}
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

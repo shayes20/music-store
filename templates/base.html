@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ config.site_name }}</title>
+    <script src="{{ url_for('static', filename='js/tailwindcss-3.4.0.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cart.js')}}" defer></script>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
+  </head>
+  <style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+  <body
+    class="bg-blue-200 text-primaryText dark:bg-gray-700 dark:text-white hide-scrollbar"
+  >
+    <nav class="bg-white dark:bg-gray-800 shadow p-4 fixed top-0 inset-x-0">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            class="w-6 mr-3"
+          />
+          <a
+            href="{{ url_for('index.index') }}"
+            class="text-gray-800 dark:text-white text-lg font-bold"
+            >{{ config.site_name }}</a
+          >
+        </div>
+        {% if user %} 
+          <span class="text-gray-300 text-m pr-4 uppercase font-bold">
+          {{ user.username }}
+          </span>
+        {% endif%}
+        <div class="flex items-center">
+          {% if user %}
+      
+            <a
+              href="{{ url_for('orders.orders') }}"
+              class="text-gray-800 dark:text-white mr-4"
+              >Orders</a
+            >
+            <a
+              href="{{ url_for('logout.logout') }}"
+              class="text-gray-800 dark:text-white"
+              >Logout</a
+            >
+            {% else %}
+            <a
+            href="{{ url_for('login.login') }}"
+            class="text-gray-800 dark:text-white mr-4"
+            >Login</a
+            >
+            <a
+            href="{{ url_for('register.register') }}"
+            class="text-gray-800 dark:text-white"
+            >Register</a
+            >
+            {% endif %}
+            <div
+              class="relative cursor-pointer ml-4"
+              onClick="window.location.href='{{ url_for('cart.cart') }}'"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                width="22"
+                viewBox="0 0 576 512"
+              >
+                <path
+                  fill="white"
+                  d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+                />
+              </svg>
+              <span
+                id="cart-counter"
+                class="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-0.5 text-[0.6rem] font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
+              >
+                0
+              </span>
+            </div>
+          </div>
+        </div>
+    </div>
+    </nav>
+    <div class="flex flex-col text-center mx-10 mt-24 mb-24">
+      {% block content %} {% endblock %}
+    </div>
+    <footer
+      class="bg-white dark:bg-gray-800 shadow p-4 mt-8 fixed bottom-0 inset-x-0"
+    >
+      <div class="container mx-auto text-center">
+        {{ config.site_name }} © 2023
+      </div>
+    </footer>
+  </body>
+</html>
